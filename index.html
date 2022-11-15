@@ -19,12 +19,15 @@
 
         <section id="search-for-city" class="col-3 .flex-columnn" class>
             <h2 id="search-box-label" name="search-box">Search for a City:</h2>
-            <input id="search-box" name="search-box" class="form-control form-control-lg" placeholder="San Diego">
-            <button id="search-city-btn" class="form-control form-control-lg bg-primary bg-gradient p-2 text-white bg-opacity-75">Search</button>
-            <ul id="previous-searches-display"></ul>
+            <form id="user-input-form">
+                <input id="search-box" name="search-box" class="form-control form-control-lg" placeholder="San Diego">
+                <button id="search-city-btn"
+                    class="form-control form-control-lg bg-primary bg-gradient p-2 text-white bg-opacity-75">Search</button>
+            </form>
+            <div id="previous-searches-container"></div>
         </section>
 
-        <section id="weather-info" class="col .flex-columnn">
+        <section id="current-weather-info" class="col .flex-columnn">
             <div id="current-weather-container">
                 <h2 id="city-date-icon"><i></i></h2>
                 <p id="current-temp"></p>
