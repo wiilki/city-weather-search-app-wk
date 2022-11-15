@@ -5,32 +5,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css" />
     <title>City Weather Search App</title>
 </head>
 
 <body>
-    <header>
+    <header class="bg-primary bg-gradient p-2 text-white bg-opacity-90">
         <h1>Weather Dashboard</h1>
     </header>
 
-    <section id="search-for-city">
-        <h2 id="search-box-label" name="search-box">Search for a City:</h2>
-        <input id="search-box" name="search-box" placeholder="San Diego">
-        <button id="search-city-btn">Search</button>
-        <ul id="previous-searches-display"></ul>
-    </section>
+    <div class="row">
 
-    <div id="current-weather-container">
-        <h2 id="city-date-icon"><i></i></h2>
-        <p id="current-temp"></p>
-        <p id="current-wind"></p>
-        <p id="current-humidity"></p>
-    </div>
+        <section id="search-for-city" class="col-3 .flex-columnn" class>
+            <h2 id="search-box-label" name="search-box">Search for a City:</h2>
+            <input id="search-box" name="search-box" class="form-control form-control-lg" placeholder="San Diego">
+            <button id="search-city-btn" class="form-control form-control-lg bg-primary bg-gradient p-2 text-white bg-opacity-75">Search</button>
+            <ul id="previous-searches-display"></ul>
+        </section>
 
-    <div id="five-day-forecast-container">
-        <h3 id="five-day-forecast-label">5-Day Forecast:</h3>
-        <div id="five-day-forecast-display"></div>
+        <section id="weather-info" class="col .flex-columnn">
+            <div id="current-weather-container">
+                <h2 id="city-date-icon"><i></i></h2>
+                <p id="current-temp"></p>
+                <p id="current-wind"></p>
+                <p id="current-humidity"></p>
+            </div>
+
+            <div id="five-day-forecast-container">
+                <h3 id="five-day-forecast-label">5-Day Forecast:</h3>
+                <div id="five-day-forecast-display"></div>
+            </div>
+        </section>
+
     </div>
 
     <script src="assets/js/script.js"></script>
