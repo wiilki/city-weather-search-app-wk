@@ -7,18 +7,12 @@ var futureWeatherContainer = document.querySelector('#future-forecast-container'
 
 var formSubmitHandler = function (event) {
     event.preventDefault();
-    findCityName();
+    getCurrentData();
+
+
 };
 
-var lonCoord;
-var latCoord;
-var cityNameDisplay;
-var currentTemp;
-var currentWind;
-var currentHumidity;
-
-
-var findCityName = function (city) {
+var getCurrentData = function (city) {
     var cityName = cityInputEl.value.trim();
     if (cityName) {
         //Get current weather function here
@@ -38,21 +32,21 @@ var findCityName = function (city) {
             }
         })
         .then(function (data) {
-            cityNameDisplay = data.name;
-            lonCoord = data.coord.lon;
-            latCoord = data.coord.lat;
-            currentTemp = data.main.temp + "°F";
-            currentWind = data.wind.speed + " MPH"
-            currentHumidity = data.main.humidity + " %";
-            currentIcon = data.weather.icon;
+            var cityHeader = document.createElement('h2');
+            var displayTemp = document.createElement('p');
+            var displayWind = document.createElement('p');
+            var displayHumidity = document.createElement('p');
 
-            console.log(cityNameDisplay);
-            console.log(currentTemp);
-            console.log(currentWind);
-            console.log(currentHumidity);
-            console.log(currentIcon);
+            cityHeader.innerHTML = data.name + " (TODAYS DATE) " + data.weather.icon;
+            displayTemp.textContent = "Temp: " + data.main.temp + "°F";
+            displayWind.textContent = "Wind: " + data.wind.speed + " MPH"
+            displayHumidity.textContent = "Humidity: " + data.main.humidity + " %";
+
+            currentWeatherContainer.appendChild(cityHeader);
+            currentWeatherContainer.appendChild(displayTemp);
+            currentWeatherContainer.appendChild(displayWind);
+            currentWeatherContainer.appendChild(displayHumidity);
         });
-  
 }
 
 
