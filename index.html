@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css"/>
+    <link rel="stylesheet" href="assets/css/style.css" />
     <script
     src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
     integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
@@ -33,7 +33,12 @@
         </section>
 
         <section id="current-weather-info" class="col .flex-columnn">
-            <div id="current-weather-container"></div>
+            <div id="current-weather-container">
+                <h2 id="city-date"><i id="icon"></i></h2>
+                <p id="current-temp"></p>
+                <p id="current-wind"></p>
+                <p id="current-humidity"></p>
+            </div>
 
             <div id="future-forecast-container">
                 <h3 id="future-forecast-label">5-Day Forecast:</h3>

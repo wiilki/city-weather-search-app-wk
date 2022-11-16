@@ -4,6 +4,10 @@ var searchesContainerEl = document.querySelector('#previous-searches-container')
 var cityInputEl = document.querySelector('#search-box');
 var currentWeatherContainer = document.querySelector('#current-weather-container');
 var futureWeatherContainer = document.querySelector('#future-forecast-container');
+var cityHeaderDiv = document.querySelector('#city-date');
+var tempDiv = document.querySelector('#current-temp');
+var windDiv = document.querySelector('#current-wind');
+var humidityDiv = document.querySelector('#current-humidity');
 var today = dayjs();
 
 
@@ -37,25 +41,16 @@ var getCurrentData = function (city) {
             }
         })
         .then(function (data) {
-            // Create HTML elements/tags
-            var cityHeader = document.createElement('h2');
-            var displayTemp = document.createElement('p');
-            var displayWind = document.createElement('p');
-            var displayHumidity = document.createElement('p');
-            var displayIcon = document.createElement('i');
-          
             // Set display text for current weather
-            displayIcon.append(data.weather.icon);
-            cityHeader.innerHTML = data.name + today.format(' [(]M/D/YY[)] ');
-            cityHeader.append(displayIcon);
-            displayTemp.textContent = "Temp: " + data.main.temp + "°F";
-            displayWind.textContent = "Wind: " + data.wind.speed + " MPH"
-            displayHumidity.textContent = "Humidity: " + data.main.humidity + " %";
+            cityHeaderDiv.innerHTML = data.name + today.format(' [(]M/D/YY[)] ');
+            tempDiv.textContent = "Temp: " + data.main.temp + "°F";
+            windDiv.textContent = "Wind: " + data.wind.speed + " MPH"
+            humidityDiv.textContent = "Humidity: " + data.main.humidity + " %";
             // Appened weather info to body
-            currentWeatherContainer.appendChild(cityHeader);
-            currentWeatherContainer.appendChild(displayTemp);
-            currentWeatherContainer.appendChild(displayWind);
-            currentWeatherContainer.appendChild(displayHumidity);
+            currentWeatherContainer.appendChild(cityHeaderDiv);
+            currentWeatherContainer.appendChild(tempDiv);
+            currentWeatherContainer.appendChild(windDiv);
+            currentWeatherContainer.appendChild(humidityDiv);
         });
 
 
