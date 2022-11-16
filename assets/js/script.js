@@ -2,12 +2,14 @@ var userFormEl = document.querySelector('#user-input-form');
 var cityInputEl = document.querySelector('#search-box');
 var searchesContainerEl = document.querySelector('#previous-searches-container');
 var cityInputEl = document.querySelector('#search-box');
+var allInfoContainer = document.querySelector('#all-weather-info');
 var currentWeatherContainer = document.querySelector('#current-weather-container');
 var futureWeatherContainer = document.querySelector('#future-forecast-container');
 var cityHeaderDiv = document.querySelector('#city-date');
 var tempDiv = document.querySelector('#current-temp');
 var windDiv = document.querySelector('#current-wind');
-var humidityDiv = document.querySelector('#current-humidity');
+var humidityDiv = document.querySelector('#current-humidity');;
+var iconLink = document.querySelector('#icon-link')
 var today = dayjs();
 
 
@@ -42,11 +44,12 @@ var getCurrentData = function (city) {
         })
         .then(function (data) {
             // Set display text for current weather
-            cityHeaderDiv.innerHTML = data.name + today.format(' [(]M/D/YY[)] ');
+            cityHeaderDiv.textContent = data.name + today.format(' [(]M/D/YY[)] ');
             tempDiv.textContent = "Temp: " + data.main.temp + "°F";
             windDiv.textContent = "Wind: " + data.wind.speed + " MPH"
             humidityDiv.textContent = "Humidity: " + data.main.humidity + " %";
-            // Appened weather info to body
+
+            // Render result to screen
             currentWeatherContainer.appendChild(cityHeaderDiv);
             currentWeatherContainer.appendChild(tempDiv);
             currentWeatherContainer.appendChild(windDiv);
@@ -63,8 +66,6 @@ var getCurrentData = function (city) {
             // Create HTML elements/tags
 
         });
-
-    // 'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API%20key}
 }
 
 
