@@ -9,7 +9,7 @@ var cityHeaderDiv = document.querySelector('#city-date');
 var tempDiv = document.querySelector('#current-temp');
 var windDiv = document.querySelector('#current-wind');
 var humidityDiv = document.querySelector('#current-humidity');;
-var iconLink = document.querySelector('#icon-link')
+var icon = document.querySelector('#icon')
 var today = dayjs();
 
 
@@ -43,10 +43,15 @@ var getData = function (city) {
         })
         .then(function (data) {
             // Set display text for current weather
-            cityHeaderDiv.textContent = data.name + today.format(' [(]M/D/YY[)] ');
+            var image = document.createElement("img");
             tempDiv.textContent = "Temp: " + data.main.temp + "°F";
             windDiv.textContent = "Wind: " + data.wind.speed + " MPH"
             humidityDiv.textContent = "Humidity: " + data.main.humidity + " %";
+            // Get ID code for icon and insert into API url
+            image.src = "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png";
+            // Render location, date and icon
+            cityHeaderDiv.innerHTML = data.name + today.format(' [(]M/D/YY[)] ');
+            cityHeaderDiv.appendChild(image)
             // Render result to screen
             currentWeatherContainer.appendChild(cityHeaderDiv);
             currentWeatherContainer.appendChild(tempDiv);
