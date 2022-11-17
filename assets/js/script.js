@@ -15,13 +15,12 @@ var today = dayjs();
 
 var formSubmitHandler = function (event) {
     event.preventDefault();
-    getCurrentData();
-
+    getData();
 
 };
 
 // Reads user input. Error if no input
-var getCurrentData = function (city) {
+var getData = function (city) {
     var cityName = cityInputEl.value.trim();
     if (cityName) {
         cityInputEl.value = '';
@@ -48,28 +47,32 @@ var getCurrentData = function (city) {
             tempDiv.textContent = "Temp: " + data.main.temp + "°F";
             windDiv.textContent = "Wind: " + data.wind.speed + " MPH"
             humidityDiv.textContent = "Humidity: " + data.main.humidity + " %";
-
             // Render result to screen
             currentWeatherContainer.appendChild(cityHeaderDiv);
             currentWeatherContainer.appendChild(tempDiv);
             currentWeatherContainer.appendChild(windDiv);
             currentWeatherContainer.appendChild(humidityDiv);
-        });
 
-
-    fetch(currentApiURL)
-        .then(function (response) {
-            // Parse info from api. Error message already in previous fetch
+            // Fetch new API created by lat & lon values
+            return fetch('https://api.openweathermap.org/data/2.5/forecast?lat=' + data.coord.lat + '&lon=' + data.coord.lon + '&appid=8062480d86820bb8c5aa0929de58588d&units=imperial')
+        })   .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-            // Create HTML elements/tags
-
+            console.log(data.list[2].dt)
         });
 }
 
 
 
+
+// var futureData = {
+//     1: { city: '', date: '', temp: '', wind: '', humid: '' },
+//     2: { city: '', date: '', temp: '', wind: '', humid: '' },
+//     3: { city: '', date: '', temp: '', wind: '', humid: '' },
+//     4: { city: '', date: '', temp: '', wind: '', humid: '' },
+//     5: { city: '', date: '', temp: '', wind: '', humid: '' }
+// };
 
 
 userFormEl.addEventListener('submit', formSubmitHandler);
