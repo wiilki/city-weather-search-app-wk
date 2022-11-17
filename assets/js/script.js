@@ -52,10 +52,15 @@ var getData = function (city) {
             currentWeatherContainer.appendChild(tempDiv);
             currentWeatherContainer.appendChild(windDiv);
             currentWeatherContainer.appendChild(humidityDiv);
-
+            // Add class, which adds border
+            var currentContainer = document.querySelector("#current-weather-container");
+            currentContainer.classList.add("currentContainer");
+            // Add label for future weather container
+            var futureContainer = document.querySelector("#future-forecast-label");
+            futureContainer.textContent = "5-Day Forecast:";
             // Fetch new API created by lat & lon values
             return fetch('https://api.openweathermap.org/data/2.5/forecast?lat=' + data.coord.lat + '&lon=' + data.coord.lon + '&appid=8062480d86820bb8c5aa0929de58588d&units=imperial')
-        })   .then(function (response) {
+        }).then(function (response) {
             return response.json();
         })
         .then(function (data) {

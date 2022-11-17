@@ -10,3 +10,9 @@ header {
     margin: 30px 0px;
 }
 
+.currentContainer {
+    border: 1px solid black;
+    max-width: 80%;
+    padding: 10px;
+    border-radius: 20px;
+}
