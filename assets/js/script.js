@@ -76,11 +76,11 @@ var getData = function (city) {
         })
         .then(function (data) {
             // Adds each data point for 5 days to arrays
-            for (i = 0; i < (i*3); i++) {
-                dates.push(data.list[i].dt);
-                temps.push(data.list[i].main.temp);
-                winds.push(data.list[i].wind.speed);
-                humids.push(data.list[i].main.humidity);
+            for (i = 0; i < 5; i++) {
+                dates.push(data.list[i*8].dt);
+                temps.push(data.list[i*8].main.temp);
+                winds.push(data.list[i*8].wind.speed);
+                humids.push(data.list[i*8].main.humidity);
             };
         })
         .then(function (arrayInfo) {
@@ -88,7 +88,7 @@ var getData = function (city) {
             for (i = 0; i < 5; i++) {
                 // Finds specific div
                 var dayNum = document.querySelector('#day-' + i);
-
+               
                 // Create dynamic <p>
                 var displayDate = document.createElement('p');
                 var displayTemp = document.createElement('p');
@@ -101,13 +101,14 @@ var getData = function (city) {
                 displayTemp.textContent = 'Temp: ' + temps[i] + '°F';
                 displayWind.textContent = 'Wind: ' + winds[i] + ' MPH';
                 displayHumid.textContent = 'Humidity: ' + humids[i] + '%'
-console.log(displayDate)
+
                 // Appened values to 5-day container
                 dayNum.appendChild(displayDate);
                 dayNum.appendChild(displayTemp);
                 dayNum.appendChild(displayWind);
                 dayNum.appendChild(displayHumid);
 
+                // Adds styling to each day box
                 dayNum.classList.add("currentContainer");
 
             }
