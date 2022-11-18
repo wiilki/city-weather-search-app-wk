@@ -22,17 +22,12 @@ var humids = [];
 var formSubmitHandler = function (event) {
     event.preventDefault();
     getData();
-
-};
+}
 
 // Reads user input. Error if no input
 var getData = function (city) {
     var cityName = cityInputEl.value.trim();
-    if (cityName) {
-        cityInputEl.value = '';
-    } else {
-        alert('Please enter a city name');
-    }
+    cityInputEl.value = '';
 
     // Call api by city name first
     var currentApiURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=8062480d86820bb8c5aa0929de58588d&units=imperial';
@@ -41,11 +36,7 @@ var getData = function (city) {
     fetch(currentApiURL)
         .then(function (response) {
             // Parse info from api
-            if (response.ok) {
-                return response.json();
-            } else {
-                alert('Error: cannot find city. Check your spelling');
-            }
+            return response.json();
         })
         .then(function (data) {
 
@@ -118,9 +109,11 @@ var getData = function (city) {
 
                 // Adds styling to each day box
                 dayNum.classList.add("day-div");
+            };
+        }) .catch(function(error) {
+            alert('Cannot find city. Check your spelling');
+        })
 
-            }
-        });
 }
 
 
