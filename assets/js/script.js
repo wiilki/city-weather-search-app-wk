@@ -9,7 +9,8 @@ var cityHeaderDiv = document.querySelector('#city-date');
 var tempDiv = document.querySelector('#current-temp');
 var windDiv = document.querySelector('#current-wind');
 var humidityDiv = document.querySelector('#current-humidity');;
-var icon = document.querySelector('#icon')
+var icon = document.querySelector('#icon');
+var futureDisplayDiv = document.querySelector('#future-forecast-row');
 var today = dayjs();
 
 
@@ -42,27 +43,32 @@ var getData = function (city) {
             }
         })
         .then(function (data) {
+
             // Set display text for current weather
             var image = document.createElement("img");
             tempDiv.textContent = "Temp: " + data.main.temp + "°F";
             windDiv.textContent = "Wind: " + data.wind.speed + " MPH"
             humidityDiv.textContent = "Humidity: " + data.main.humidity + " %";
+
             // Get ID code for icon and insert into API url
             image.src = "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png";
             // Render location, date and icon
             cityHeaderDiv.innerHTML = data.name + today.format(' [(]M/D/YY[)] ');
             cityHeaderDiv.appendChild(image)
+
             // Render result to screen
             currentWeatherContainer.appendChild(cityHeaderDiv);
             currentWeatherContainer.appendChild(tempDiv);
             currentWeatherContainer.appendChild(windDiv);
             currentWeatherContainer.appendChild(humidityDiv);
+
             // Add class, which adds border
             var currentContainer = document.querySelector("#current-weather-container");
             currentContainer.classList.add("currentContainer");
             // Add label for future weather container
             var futureContainer = document.querySelector("#future-forecast-label");
             futureContainer.textContent = "5-Day Forecast:";
+
             // Fetch new API created by lat & lon values
             return fetch('https://api.openweathermap.org/data/2.5/forecast?lat=' + data.coord.lat + '&lon=' + data.coord.lon + '&appid=8062480d86820bb8c5aa0929de58588d&units=imperial')
         }).then(function (response) {
@@ -70,27 +76,49 @@ var getData = function (city) {
         })
         .then(function (data) {
             // Adds each data point for 5 days to arrays
-            for (i = 0; i < 5; i++) {
+            for (i = 0; i < (i*3); i++) {
                 dates.push(data.list[i].dt);
                 temps.push(data.list[i].main.temp);
                 winds.push(data.list[i].wind.speed);
                 humids.push(data.list[i].main.humidity);
             };
+        })
+        .then(function (arrayInfo) {
+            // Iterates 5 times
+            for (i = 0; i < 5; i++) {
+                // Finds specific div
+                var dayNum = document.querySelector('#day-' + i);
+
+                // Create dynamic <p>
+                var displayDate = document.createElement('p');
+                var displayTemp = document.createElement('p');
+                var displayWind = document.createElement('p');
+                var displayHumid = document.createElement('p');
+
+                // Future weather values
+                var newDate = dayjs.unix(dates[i]);
+                displayDate.innerHTML = newDate.format('M/D/YY');
+                displayTemp.textContent = 'Temp: ' + temps[i] + '°F';
+                displayWind.textContent = 'Wind: ' + winds[i] + ' MPH';
+                displayHumid.textContent = 'Humidity: ' + humids[i] + '%'
+console.log(displayDate)
+                // Appened values to 5-day container
+                dayNum.appendChild(displayDate);
+                dayNum.appendChild(displayTemp);
+                dayNum.appendChild(displayWind);
+                dayNum.appendChild(displayHumid);
+
+                dayNum.classList.add("currentContainer");
+
+            }
         });
-
-
-
-    console.log(dates);
-    console.log(temps);
-    console.log(winds);
-    console.log(humids);
 }
-
 
 var dates = [];
 var temps = [];
 var winds = [];
 var humids = [];
+
 
 
 
