@@ -19,5 +19,25 @@ header {
 }
 
 #future-forecast-row {
-    display: inline-flex;
+    display: flex;
+    flex-direction: row;
+}
+
+.day-div {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;;
+    border-radius: 20px;
+    min-width: 15%;
+    background-color: rgb(18, 18, 68);
+    color: white;
+}
+
+@media screen and (max-width: 768px) {
+    #future-forecast-row {
+        flex-direction: column;
+    }
+    .day-div {
+        max-width: 200px;
+    }
 }

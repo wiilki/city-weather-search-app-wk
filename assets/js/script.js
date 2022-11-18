@@ -12,6 +12,11 @@ var humidityDiv = document.querySelector('#current-humidity');;
 var icon = document.querySelector('#icon');
 var futureDisplayDiv = document.querySelector('#future-forecast-row');
 var today = dayjs();
+var icons = [];
+var dates = [];
+var temps = [];
+var winds = [];
+var humids = [];
 
 
 var formSubmitHandler = function (event) {
@@ -45,18 +50,17 @@ var getData = function (city) {
         .then(function (data) {
 
             // Set display text for current weather
-            var image = document.createElement("img");
+            var icon = document.createElement("img");
             tempDiv.textContent = "Temp: " + data.main.temp + "°F";
             windDiv.textContent = "Wind: " + data.wind.speed + " MPH"
             humidityDiv.textContent = "Humidity: " + data.main.humidity + " %";
 
             // Get ID code for icon and insert into API url
-            image.src = "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png";
-            // Render location, date and icon
-            cityHeaderDiv.innerHTML = data.name + today.format(' [(]M/D/YY[)] ');
-            cityHeaderDiv.appendChild(image)
+            icon.src = "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png";
 
             // Render result to screen
+            cityHeaderDiv.innerHTML = data.name + today.format(' [(]M/D/YY[)] ');
+            cityHeaderDiv.appendChild(icon)
             currentWeatherContainer.appendChild(cityHeaderDiv);
             currentWeatherContainer.appendChild(tempDiv);
             currentWeatherContainer.appendChild(windDiv);
@@ -77,10 +81,12 @@ var getData = function (city) {
         .then(function (data) {
             // Adds each data point for 5 days to arrays
             for (i = 0; i < 5; i++) {
-                dates.push(data.list[i*8].dt);
-                temps.push(data.list[i*8].main.temp);
-                winds.push(data.list[i*8].wind.speed);
-                humids.push(data.list[i*8].main.humidity);
+                // Pulling from .list[i*8] because fetch array increments by every 3 hours (24hrs % 3hrs = 8)
+                icons.push(data.list[i * 8].weather[0].icon);
+                dates.push(data.list[i * 8].dt);
+                temps.push(data.list[i * 8].main.temp);
+                winds.push(data.list[i * 8].wind.speed);
+                humids.push(data.list[i * 8].main.humidity);
             };
         })
         .then(function (arrayInfo) {
@@ -88,37 +94,37 @@ var getData = function (city) {
             for (i = 0; i < 5; i++) {
                 // Finds specific div
                 var dayNum = document.querySelector('#day-' + i);
-               
-                // Create dynamic <p>
-                var displayDate = document.createElement('p');
+
+                // Create dynamic elements for each box
+                var displayImage = document.createElement("img");
+                var displayDate = document.createElement('h3');
                 var displayTemp = document.createElement('p');
                 var displayWind = document.createElement('p');
                 var displayHumid = document.createElement('p');
 
                 // Future weather values
+                displayImage.src = "http://openweathermap.org/img/wn/" + icons[i] + ".png"
                 var newDate = dayjs.unix(dates[i]);
-                displayDate.innerHTML = newDate.format('M/D/YY');
+                displayDate.textContent = newDate.format('M/D/YY');
                 displayTemp.textContent = 'Temp: ' + temps[i] + '°F';
                 displayWind.textContent = 'Wind: ' + winds[i] + ' MPH';
                 displayHumid.textContent = 'Humidity: ' + humids[i] + '%'
 
                 // Appened values to 5-day container
                 dayNum.appendChild(displayDate);
+                dayNum.appendChild(displayImage);
                 dayNum.appendChild(displayTemp);
                 dayNum.appendChild(displayWind);
                 dayNum.appendChild(displayHumid);
 
                 // Adds styling to each day box
-                dayNum.classList.add("currentContainer");
+                dayNum.classList.add("day-div");
 
             }
         });
 }
 
-var dates = [];
-var temps = [];
-var winds = [];
-var humids = [];
+
 
 
 
