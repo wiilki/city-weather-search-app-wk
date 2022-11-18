@@ -69,20 +69,29 @@ var getData = function (city) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data.list[2].dt)
+            // Adds each data point for 5 days to arrays
+            for (i = 0; i < 5; i++) {
+                dates.push(data.list[i].dt);
+                temps.push(data.list[i].main.temp);
+                winds.push(data.list[i].wind.speed);
+                humids.push(data.list[i].main.humidity);
+            };
         });
+
+
+
+    console.log(dates);
+    console.log(temps);
+    console.log(winds);
+    console.log(humids);
 }
 
 
+var dates = [];
+var temps = [];
+var winds = [];
+var humids = [];
 
-
-// var futureData = {
-//     1: { city: '', date: '', temp: '', wind: '', humid: '' },
-//     2: { city: '', date: '', temp: '', wind: '', humid: '' },
-//     3: { city: '', date: '', temp: '', wind: '', humid: '' },
-//     4: { city: '', date: '', temp: '', wind: '', humid: '' },
-//     5: { city: '', date: '', temp: '', wind: '', humid: '' }
-// };
 
 
 userFormEl.addEventListener('submit', formSubmitHandler);
