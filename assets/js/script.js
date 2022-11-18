@@ -79,9 +79,8 @@ var getData = function (city) {
             return response.json();
         })
         .then(function (data) {
-            // Adds each data point for 5 days to arrays
+            // Index starts at 8 then increments by 8 to get every 24 hours
             for (i = 7; i < data.list.length; i = i + 8) {
-                // Pulling from .list[i*8] because fetch array increments by every 3 hours (24hrs % 3hrs = 8)
                 icons.push(data.list[i].weather[0].icon);
                 dates.push(data.list[i].dt);
                 temps.push(data.list[i].main.temp);
