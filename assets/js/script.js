@@ -17,11 +17,14 @@ var dates = [];
 var temps = [];
 var winds = [];
 var humids = [];
+var pastSearches = [];
+
 
 
 var formSubmitHandler = function (event) {
     event.preventDefault();
     getData();
+    saveSearches();
 }
 
 // Reads user input. Error if no input
@@ -56,6 +59,7 @@ var getData = function (city) {
             currentWeatherContainer.appendChild(tempDiv);
             currentWeatherContainer.appendChild(windDiv);
             currentWeatherContainer.appendChild(humidityDiv);
+            pastSearches.push(data.name);
 
             // Add class, which adds border
             var currentContainer = document.querySelector("#current-weather-container");
@@ -110,11 +114,20 @@ var getData = function (city) {
                 // Adds styling to each day box
                 dayNum.classList.add("day-div");
             };
-        }) .catch(function(error) {
+        }).catch(function (error) {
             alert('Cannot find city. Check your spelling');
         })
 
 }
+
+function saveSearches() {
+    for (i = 0; i < pastSearches.length; i++) {
+        if (pastSearches.length > 10) {
+            pastSearches.length === 10;
+        };
+        console.log(pastSearches[i]);
+    };
+};
 
 
 
