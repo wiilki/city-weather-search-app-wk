@@ -2,13 +2,15 @@ header {
     text-align: center;
 }
 
+
 #search-for-city, #weather-info, #five-day-forecast-container {
     margin: 10px;
 }
 
-#search-box-label, #search-box, #search-city-btn, #previous-searches-display, #current-weather-container, #five-day-forecast-container {
-    margin: 30px 0px;
+#search-box-label, #search-box, #previous-searches-display, #current-weather-container, #five-day-forecast-container {
+    margin: 20px 0px;
 }
+
 
 /* Border for current weather container */
 .currentContainer {
@@ -41,3 +43,11 @@ header {
         max-width: 200px;
     }
 }
+
+.previous-searches {
+    border-radius: 5px;
+    min-width: 100%;
+    height: 45px;
+    margin: 5px 0px;
+}
+
