@@ -1,7 +1,6 @@
 $(function () {
     var userFormEl = document.querySelector('#user-input-form');
     var cityInputEl = document.querySelector('#search-box');
-    var cityInputEl = document.querySelector('#search-box');
     var currentWeatherContainer = document.querySelector('#current-weather-container');
     var cityHeaderDiv = document.querySelector('#city-date');
     var tempDiv = document.querySelector('#current-temp');
