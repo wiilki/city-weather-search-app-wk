@@ -2,7 +2,6 @@ header {
     text-align: center;
 }
 
-
 #search-for-city, #weather-info, #five-day-forecast-container {
     margin: 10px;
 }
@@ -10,7 +9,6 @@ header {
 #search-box-label, #search-box, #previous-searches-display, #current-weather-container, #five-day-forecast-container {
     margin: 20px 0px;
 }
-
 
 /* Border for current weather container */
 .currentContainer {

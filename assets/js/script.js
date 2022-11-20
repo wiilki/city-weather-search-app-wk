@@ -8,7 +8,6 @@ $(function () {
     var humidityDiv = document.querySelector('#current-humidity');
     var pastSearchesDiv = document.querySelector('#previous-searches-container');
     var futureRow = document.querySelector('#future-forecast-row');
-    var emptyModal = document.querySelector('#empty-text-modal');
     var today = dayjs();
     var pastSearchesArray = [];
     const maxSavedSearches = 10;
@@ -173,7 +172,7 @@ $(function () {
 
     // Click handler for dynamic previous search buttons
     var buttonClickHandler = function (event) {
-        event.preventDefault;
+        event.preventDefault();
         // Calls getCurrentData as a function of button's text content
         var repeatCity = event.target.textContent;
         getCurrentData(repeatCity);
