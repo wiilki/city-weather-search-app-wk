@@ -22,7 +22,7 @@ $(function () {
     var formSubmitHandler = function (event) {
         event.preventDefault();
         getData();
-        renderArray();
+
     }
 
     // Reads user input. Error if no input
@@ -42,7 +42,7 @@ $(function () {
                 .then(function (response) {
                     // Error if response cannot find city
                     if (response.status === 404) {
-                        console.log('Check your spelling'); 
+                        alert('Cannot find city. Check your spelling'); 
                     } else {
                         // Parse info from api
                         return response.json();
@@ -54,7 +54,8 @@ $(function () {
                     const notIncluded = !pastSearchesArray.includes(data.name);
                     if (notIncluded) {
                         pastSearchesArray.push(data.name);
-                        localStorage.setItem("past-searches", JSON.stringify(pastSearchesArray))
+                        localStorage.setItem("past-searches", JSON.stringify(pastSearchesArray));
+                        renderArray();
                     }
 
                     // Set display text for current weather
@@ -130,10 +131,7 @@ $(function () {
 
                         // Clear input box
                         cityInputEl.value = '';
-
                     };
-                }).catch(function (error) {
-                    alert('Cannot find city. Check your spelling');
                 })
         }
     }
