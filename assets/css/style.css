@@ -40,7 +40,8 @@ header {
         flex-direction: column;
     }
     .day-div {
-        max-width: 200px;
+        min-width: 250px;
+        align-self: center;
     }
 }
 

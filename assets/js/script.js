@@ -8,6 +8,7 @@ $(function () {
     var humidityDiv = document.querySelector('#current-humidity');
     var pastSearchesDiv = document.querySelector('#previous-searches-container');
     var futureRow = document.querySelector('#future-forecast-row');
+    var emptyModal = document.querySelector('#empty-text-modal');
     var today = dayjs();
     var pastSearchesArray = [];
     const maxSavedSearches = 10;
