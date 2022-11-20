@@ -10,12 +10,12 @@ $(function () {
     var futureRow = document.querySelector('#future-forecast-row');
     var today = dayjs();
     var pastSearchesArray = [];
+    const maxSavedSearches = 10;
 
-
+    // Even handler for new city search
     var formSubmitHandler = function (event) {
         event.preventDefault();
         var cityName = cityInputEl.value.trim();
-
         // Blank error message
         if (cityName) {
             getCurrentData(cityName);
@@ -157,6 +157,10 @@ $(function () {
             pastSearchesDiv.innerHTML = '';
             // For the length of the parsed array
             for (i = 0; i < pastSearchesArray.length; i++) {
+                // Set max length of search history to 10
+                if (pastSearchesArray.length > maxSavedSearches) {
+                    pastSearchesArray.splice(-1);
+                }
                 // Create new button
                 var displayPastSearch = document.createElement('button');
                 displayPastSearch.textContent = pastSearchesArray[i];
