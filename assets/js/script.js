@@ -9,12 +9,6 @@ $(function () {
     var pastSearchesDiv = document.querySelector('#previous-searches-container');
     var futureRow = document.querySelector('#future-forecast-row');
     var today = dayjs();
-
-    var icons = [];
-    var dates = [];
-    var temps = [];
-    var winds = [];
-    var humids = [];
     var pastSearchesArray = [];
 
 
@@ -55,11 +49,11 @@ $(function () {
     };
 
     var displayCurrentWeather = function (data) {
-
         // Makes sure city is not already saved in array  
         const notIncluded = !pastSearchesArray.includes(data.name);
         if (notIncluded) {
-            pastSearchesArray.push(data.name);
+            // Add to front of array to display most recent search first
+            pastSearchesArray.unshift(data.name);
             localStorage.setItem("past-searches", JSON.stringify(pastSearchesArray));
             renderArray(history, data);
         }
@@ -109,7 +103,6 @@ $(function () {
     }
 
     var displayFutureData = function (futureData) {
-
         // Reset arrays
         var icons = [];
         var dates = [];
@@ -128,8 +121,6 @@ $(function () {
 
         // Iterates 5 times
         for (j = 0; j < 5; j++) {
-
-
             // Create dynamic elements for each box
             var displayBox = document.createElement('div')
             var displayImage = document.createElement("img");
@@ -175,7 +166,15 @@ $(function () {
         }
     }
 
+    // Click handler for dynamic previous search buttons
+    var buttonClickHandler = function (event) {
+        event.preventDefault;
+        // Calls getCurrentData as a function of button's text content
+        var repeatCity = event.target.textContent;
+        getCurrentData(repeatCity);
+    };
 
-
+    renderArray();
     userFormEl.addEventListener('submit', formSubmitHandler);
+    pastSearchesDiv.addEventListener('click', buttonClickHandler);
 });
