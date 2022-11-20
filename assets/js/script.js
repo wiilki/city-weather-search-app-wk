@@ -21,7 +21,6 @@ $(function () {
     var formSubmitHandler = function (event) {
         event.preventDefault();
         var cityName = cityInputEl.value.trim();
-        futureRow.innerHTML = "";
 
         // Blank error message
         if (cityName) {
@@ -97,7 +96,7 @@ $(function () {
     var getFutureData = function (lat, lon) {
         // Fetch new API created by lat & lon values
         var futureApiUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=8062480d86820bb8c5aa0929de58588d&units=imperial';
-
+        futureRow.innerHTML = "";
         // Fetch for future weather conditions
         fetch(futureApiUrl)
             .then(function (newResponse) {
@@ -110,7 +109,14 @@ $(function () {
     }
 
     var displayFutureData = function (futureData) {
-       
+
+        // Reset arrays
+        var icons = [];
+        var dates = [];
+        var temps = [];
+        var winds = [];
+        var humids = [];
+
         // Index starts at 8 then increments by 8 to get every 24 hours
         for (i = 7; i < futureData.list.length; i = i + 8) {
             icons.push(futureData.list[i].weather[0].icon);
@@ -122,7 +128,7 @@ $(function () {
 
         // Iterates 5 times
         for (j = 0; j < 5; j++) {
-    
+
 
             // Create dynamic elements for each box
             var displayBox = document.createElement('div')
@@ -168,6 +174,8 @@ $(function () {
             }
         }
     }
+
+
 
     userFormEl.addEventListener('submit', formSubmitHandler);
 });
