@@ -7,7 +7,9 @@ $(function () {
     var windDiv = document.querySelector('#current-wind');
     var humidityDiv = document.querySelector('#current-humidity');
     var pastSearchesDiv = document.querySelector('#previous-searches-container');
+    var futureRow = document.querySelector('#future-forecast-row');
     var today = dayjs();
+
     var icons = [];
     var dates = [];
     var temps = [];
@@ -19,6 +21,7 @@ $(function () {
     var formSubmitHandler = function (event) {
         event.preventDefault();
         var cityName = cityInputEl.value.trim();
+        futureRow.innerHTML = "";
 
         // Blank error message
         if (cityName) {
@@ -88,7 +91,7 @@ $(function () {
 
         var lat = data.coord.lat;
         var lon = data.coord.lon;
-        getFutureData(lat, lon)
+        getFutureData(lat, lon);
     }
 
     var getFutureData = function (lat, lon) {
@@ -107,6 +110,7 @@ $(function () {
     }
 
     var displayFutureData = function (futureData) {
+       
         // Index starts at 8 then increments by 8 to get every 24 hours
         for (i = 7; i < futureData.list.length; i = i + 8) {
             icons.push(futureData.list[i].weather[0].icon);
@@ -118,11 +122,10 @@ $(function () {
 
         // Iterates 5 times
         for (j = 0; j < 5; j++) {
-            // Finds specific div
-            var dayNum = document.querySelector('#day-' + j);
-            dayNum.innerHTML = '';
+    
 
             // Create dynamic elements for each box
+            var displayBox = document.createElement('div')
             var displayImage = document.createElement("img");
             var displayDate = document.createElement('h3');
             var displayTemp = document.createElement('p');
@@ -138,14 +141,15 @@ $(function () {
             displayHumid.textContent = 'Humidity: ' + humids[j] + '%'
 
             // Appened values to 5-day container
-            dayNum.appendChild(displayDate);
-            dayNum.appendChild(displayImage);
-            dayNum.appendChild(displayTemp);
-            dayNum.appendChild(displayWind);
-            dayNum.appendChild(displayHumid);
+            futureRow.appendChild(displayBox);
+            displayBox.appendChild(displayDate);
+            displayBox.appendChild(displayImage);
+            displayBox.appendChild(displayTemp);
+            displayBox.appendChild(displayWind);
+            displayBox.appendChild(displayHumid);
 
             // Adds styling to each day box
-            dayNum.classList.add("day-div");
+            displayBox.classList.add("day-div");
         };
     };
 
