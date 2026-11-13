@@ -1,32 +1,59 @@
-# city-weather-search-app-wk
+# Atmos — Weather, beautifully clear
 
-## Description
+A responsive, accessible weather dashboard built with HTML, CSS and vanilla JavaScript. This is a complete rebuild of the original City Weather Search coursework project.
 
-This is a weather forecast application, which displays the current weather conditions and 5-day forecast for any city. I created this project to showcase my ability to understand API's.
+**Live site:** https://wiilki.github.io/city-weather-search-app-wk/ (once GitHub Pages publishes the updated `main` branch)
 
-The hardest part of this project was staying organized. I started by writing multiple .then statements within the same function. That quickly became confusing and hard to keep track of. Once I understood how to call a separate function within a .then statement,  I re-organized my entire project to improve the readability of the code.
+## Features
 
-Another challenge was getting the 5-day forecase to display dynamically. I ended up pushing all the value I needed to arrays, then rendering the values of the arrays to the screen one by one.
+- Worldwide city / postal-code search with suggestions and location disambiguation
+- Browser geolocation on demand (permission required; HTTPS or localhost)
+- Real current conditions, feels-like temperature, high / low, wind, humidity, daily maximum UV and chance of precipitation
+- Next 12 hours and a seven-day forecast
+- Sunrise, sunset and daylight duration in the forecast location's local time
+- °F/°C preference with consistent wind and precipitation unit conversions
+- Up to eight recent locations, stored locally in the browser
+- Responsive desktop/tablet/mobile layout, keyboard-friendly search, labelled controls and useful connection / API error messages
+- No embedded API keys and no frontend framework or build step
 
-This project was my first real experience with server side API's. Keeping the code organized, writing multiple functions and calling them within a .then statement from the beginning would have made this project much easier, but I'm happy with the result!
+## Run locally
 
-Enjoy!
+Open `index.html` in a browser, or serve the folder locally for the most consistent results:
 
-## Installation
+```sh
+python3 -m http.server 8000
+```
 
- * To deploy application, go to [My Github Project](https://wiilki.github.io/city-weather-search-app-wk/)
+Then visit http://localhost:8000.
 
-## Usage
+To run the regression checks:
 
- * Enter name of city then click 'Search' to view weather
- * Your past searches will appear below the search bar
- * The page will display up to your last 10 searches
- * Click on previously searched city to view weather again
+```sh
+node --test tests/weather.test.cjs
+```
 
-![Screenshot](assets/images/screenshot.png)
+The app needs an internet connection for forecast requests. The geolocation button works only when browser location access is available and allowed. You can search cities without sharing your location.
 
-## Credits
+## Weather data
 
-* [Jquery](https://code.jquery.com/jquery-3.5.1.min.js)
-* [Bootstrap](https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css)
-* [OpenWeatherMap](https://openweathermap.org/)
+Forecasts and geocoding come from [Open-Meteo](https://open-meteo.com/), including its [Forecast API](https://open-meteo.com/en/docs) and [Geocoding API](https://open-meteo.com/en/docs/geocoding-api). The no-key endpoints are **free for non-commercial use** under [Open-Meteo's terms](https://open-meteo.com/en/terms); a commercial/advertising site would need an appropriate paid API plan. Weather data is provided under CC BY 4.0 and attributed in the dashboard. This project does not provide severe-weather alerts.
+
+Current conditions are model-derived, not a station observation. Forecasts can change, and sunrise/sunset times are local to the searched location.
+
+## Project structure
+
+```
+index.html                 Page structure and semantic controls
+assets/css/style.css       Responsive design system
+assets/js/script.js        API requests, search, data formatting, rendering
+tests/weather.test.cjs     Mocked API regression checks
+.github/workflows/ci.yml   GitHub Actions regression workflow
+```
+
+## Security & privacy
+
+No weather API secrets are stored in the client. Recent searches and the display-unit preference are kept in browser `localStorage` and are not uploaded to this project. Weather and search requests are sent directly from the browser to Open-Meteo. Your browser only requests geolocation after you click **Use my current location**.
+
+## Original project
+
+This repository began as a JavaScript weather API assignment. The prior implementation used an OpenWeather API key embedded in JavaScript, HTTP icon URLs, and basic Bootstrap/jQuery styling. The new version replaces the API and removes those dependencies.
