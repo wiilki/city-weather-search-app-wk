@@ -2,7 +2,7 @@
 
 A responsive, accessible weather dashboard built with HTML, CSS and vanilla JavaScript. This is a complete rebuild of the original City Weather Search coursework project.
 
-**Live site:** https://wiilki.github.io/city-weather-search-app-wk/ (once GitHub Pages publishes the updated `main` branch)
+**Live redesigned site:** https://atmos-weather-roan.vercel.app/
 
 ## Features
 
@@ -15,6 +15,12 @@ A responsive, accessible weather dashboard built with HTML, CSS and vanilla Java
 - Up to eight recent locations, stored locally in the browser
 - Responsive desktop/tablet/mobile layout, keyboard-friendly search, labelled controls and useful connection / API error messages
 - No embedded API keys and no frontend framework or build step
+
+## Production deployment
+
+The live redesigned dashboard was deployed directly to the `atmos-weather` Vercel project from the current `main` source (commit `fba2428`, November 13, 2026). The previous GitHub Pages URL may still show the older coursework version.
+
+**Deployment note:** Vercel could not attach this GitHub repository through the current Git integration, so the deployment is a source-file snapshot rather than an automatic Git deployment. Future edits to `main` require a fresh deployment until a Git connection or automated release pipeline is configured.
 
 ## Run locally
 
